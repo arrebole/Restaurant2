@@ -1,0 +1,42 @@
+.login-main{
+    position: relative;
+    top: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 160px;
+    background-color: rgb(190, 190, 190);
+    color: rgb(92, 92, 92);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.login-input{
+    height: 30px;
+    width: 180px;
+    margin: 10px;
+    border-radius: 3%;
+    text-indent: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.349);
+}
+.login-title{
+    position: relative;
+    top: 100px;
+    text-align: center;
+    
+}
+.login-btn{
+    height: 30px;
+    width: 80px;
+    margin-left: 70px;
+    background-color: rgb(30, 144, 210);
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-radius: 3%;
+    color: aliceblue;
+}
+.login-btn:hover{
+    background-color: rgb(28, 88, 218);
+}

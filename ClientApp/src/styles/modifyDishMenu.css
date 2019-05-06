@@ -1,0 +1,11 @@
+.modify-dish{
+    width: 460px;
+}
+
+.dish-input{
+    margin: 20px 8px 8px 10px;
+    display: flex;
+}
+.dish-button{
+    margin-left: 80px;
+}

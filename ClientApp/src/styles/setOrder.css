@@ -1,0 +1,23 @@
+.set-order{
+    
+}
+.set-order-main{
+    text-align: center;
+   /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+    /* flex-direction: column; */
+}
+
+.set-order-buttons{
+    height: 60px;
+    padding: 10px;
+}
+.show-dishs{
+    display: flex;
+    justify-content: center;
+}
+.order-list{
+    min-height: 40px;
+    padding: 20px
+}

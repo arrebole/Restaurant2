@@ -1,0 +1,11 @@
+.dish-manage-main{
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+    justify-content: center;
+    align-items: center;
+}
+.alldish{
+    width: 900px;
+    padding-top: 20px;
+}
