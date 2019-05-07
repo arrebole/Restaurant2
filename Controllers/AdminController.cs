@@ -24,23 +24,12 @@ namespace Restaurant.Controllers
         {
             // 初始化座位
             this._dbContext = dbContext;
-            if (this._dbContext.statistics.Count() == 0)
-            {
-                this._dbContext.statistics.Add(new Statistics
-                {
-                    subscription = 0,
-                    refund = 0,
-                    totalRevenue = 0,
-                });
-                this._dbContext.SaveChanges();
-            }
         }
 
         // 管理员登陆
         [HttpPost]
         public ActionResult<Sign> Login([FromBody]User info)
         {
-            Console.WriteLine(info.userName);
             if (info.userName == this._dbContext.user.userName && info.passWord == this._dbContext.user.passWord)
             {
                 return SignFactory.createSign(SignType.success);
@@ -53,42 +42,42 @@ namespace Restaurant.Controllers
         public ActionResult<Sign> Dish([FromBody]ManageDish manageDish)
         {
             // 将菜单操作转化为菜单对象
-            Console.WriteLine("========修改菜单===========");
-            Dish dish = DishFactoary.ManageDishToDish(manageDish);
+            //Console.WriteLine("========修改菜单===========");
+            Dish dish = DishFactoary.ManageDishCloneToDish(manageDish);
 
             // 区分操作
             switch (manageDish.func)
             {
                 // 添加
                 case ManageDishFunc.add:
-                    Console.WriteLine("========添加===========");
+                    //Console.WriteLine("========添加===========");
                     _dbContext.dishs.Add(dish);
                     break;
 
                 // 删除
                 case ManageDishFunc.delete:
-                    Console.WriteLine("=========删除===========");
+                    // Console.WriteLine("=========删除===========");
                     var item = _dbContext.dishs.FirstOrDefault(t => t.name == manageDish.name);
                     _dbContext.dishs.Remove(item);
                     break;
 
                 // 修改
                 case ManageDishFunc.modify:
-                    Console.WriteLine("========修改===========");
+                    // Console.WriteLine("========修改===========");
                     var updateItem = _dbContext.dishs.FirstOrDefault(t => t.name == manageDish.name);
                     if (updateItem == null)
                     {
                         return SignFactory.createSign(SignType.error);
                     }
-                    updateItem.name = dish.name;
-                    updateItem.price = dish.price;
-                    updateItem.classify = dish.classify;
+
+                    updateItem = Copy.UpdateDish(updateItem, dish);
                     _dbContext.dishs.Update(updateItem);
                     break;
 
                 default:
                     break;
             }
+            
             _dbContext.SaveChanges();
             return SignFactory.createSign(SignType.success);
         }
@@ -97,7 +86,7 @@ namespace Restaurant.Controllers
         [HttpGet]
         public ActionResult<List<Dish>> Getdish()
         {
-            Console.WriteLine("========获取所有菜单===========");
+            //Console.WriteLine("========获取所有菜单===========");
             return _dbContext.dishs.AsNoTracking().ToList();
         }
 

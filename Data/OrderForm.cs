@@ -13,16 +13,16 @@ namespace Restaurant.Data
 
         public string list { get; set; }
         // 找零
-        public double change(double pay)
-        {
-            return pay - total;
-        }
+        // public double change(double pay)
+        // {
+        //     return pay - total;
+        // }
 
-        // 打印账单
-        public string printOrder()
-        {
-            return "hello world";
-        }
+        // // 打印账单
+        // public string printOrder()
+        // {
+        //     return "hello world";
+        // }
 
     }
 }

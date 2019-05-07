@@ -31,7 +31,7 @@ namespace Restaurant.Data
 
     public class DishFactoary
     {
-        public static Dish ManageDishToDish(ManageDish manageDish)
+        public static Dish ManageDishCloneToDish(ManageDish manageDish)
         {
             Dish dish = new Dish
             {

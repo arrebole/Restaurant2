@@ -24,11 +24,6 @@ namespace Restaurant.Controllers
         public OrderController(DataContext dbContext)
         {
             this._dbContext = dbContext;
-            if (_dbContext.seats.Count() == 0)
-            {
-                initDB.makeSeat(_dbContext, 12);
-            }
-
         }
 
         // 挑选座位
@@ -38,27 +33,28 @@ namespace Restaurant.Controllers
             return _dbContext.seats.AsNoTracking().ToList();
         }
 
+        // 获取所有菜单
         [HttpGet]
         public ActionResult<List<Dish>> Getdish()
         {
-            Console.WriteLine("========获取所有菜单===========");
+            //Console.WriteLine("========获取所有菜单===========");
             return _dbContext.dishs.AsNoTracking().ToList();
         }
 
+        // 更新订单
         [HttpPost]
-        // 提交订单
         public ActionResult<Sign> UpdateOrderForm([FromBody]OrderForm postOrder)
         {
             var item = this._dbContext.seats.FirstOrDefault(i => i.Id == postOrder.seatId);
-            item.orderForm = postOrder.list;
-            item.total = postOrder.total;
+            item = Copy.UpdateOrderForm(item,postOrder);
+            
             this._dbContext.seats.Update(item);
             this._dbContext.SaveChanges();
+            
             return SignFactory.createSign(SignType.success);
         }
-
-        [HttpGet]
         // 获取订单
+        [HttpGet]
         public string OrderForm(int seatId)
         {
             var item = _dbContext.seats.FirstOrDefault(t => t.Id == seatId);
@@ -69,8 +65,8 @@ namespace Restaurant.Controllers
             return item.orderForm;
         }
 
-        [HttpGet]
         // 占位
+        [HttpGet]
         public ActionResult<Sign> PlaceHolder(long seatId)
         {
             var item = _dbContext.seats.FirstOrDefault(t => t.Id == seatId);
@@ -81,12 +77,12 @@ namespace Restaurant.Controllers
             item.isCanUse = false;
             _dbContext.seats.Update(item);
             _dbContext.SaveChanges();
-            Console.WriteLine(seatId);
+
             return SignFactory.createSign(SignType.success);
         }
 
-        [HttpGet]
         // 退位置
+        [HttpGet]
         public ActionResult<Sign> PlaceClose(long seatId)
         {
             var item = _dbContext.seats.FirstOrDefault(t => t.Id == seatId);

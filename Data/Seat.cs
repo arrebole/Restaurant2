@@ -9,11 +9,14 @@ namespace Restaurant.Data
     {
         public long Id { get; set; }
         public Boolean isCanUse { get; set; }
-
         public double total { get; set; }
         public string orderForm { get; set; }
     }
 
+
+    // Patterns: Creational SimpleFactory
+    // Algorithm: _
+    // Description: 创建初始化的 List<Srat>
     public class SeatFactory
     {
         public static List<Seat> createSeats(int num)
@@ -21,8 +24,11 @@ namespace Restaurant.Data
             var seats = new List<Seat>();
             for (int i = 0; i < num; i++)
             {
-                seats.Add(new Seat());
-                seats[i].isCanUse = true;
+                seats.Add(new Seat
+                {
+                    isCanUse = true,
+                    total = 0,
+                });
             }
             return seats;
         }

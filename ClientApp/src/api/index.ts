@@ -16,7 +16,7 @@ interface IApi {
 // 单例模式
 class SingletonApi implements IApi {
     private constructor() {
-        this._domain = "127.0.0.1:8080";
+        this._domain = "";
     };
     private _domain: string;
     private static _instance: IApi;
@@ -44,44 +44,44 @@ class SingletonApi implements IApi {
     }
 
     public getOrderSeats(): Promise<Array<ISeat>> {
-        return this.commfetchGetFunc(`http://${this._domain}/api/Order/ChooseSeat`);
+        return this.commfetchGetFunc(`${this._domain}/api/Order/ChooseSeat`);
     }
 
     public postTryLogin(data: ILoginForm): Promise<ISiga> {
-        return this.commfetchPostFunc(`http://${this._domain}/api/admin/login`, JSON.stringify(data));
+        return this.commfetchPostFunc(`${this._domain}/api/admin/login`, JSON.stringify(data));
     }
 
     public postManageDish(data: IManageDish): Promise<ISiga> {
-        return this.commfetchPostFunc(`http://${this._domain}/api/admin/dish`, JSON.stringify(data));
+        return this.commfetchPostFunc(`${this._domain}/api/admin/dish`, JSON.stringify(data));
     }
 
     public getAllDish(): Promise<Array<IDish>> {
-        return this.commfetchGetFunc(`http://${this._domain}/api/order/getdish`);
+        return this.commfetchGetFunc(`${this._domain}/api/order/getdish`);
     }
 
     public postOrder(data: I0rder): Promise<ISiga> {
         console.log(JSON.stringify(data));
-        return this.commfetchPostFunc(`http://${this._domain}/api/order/updateorderform`, JSON.stringify(data));
+        return this.commfetchPostFunc(`${this._domain}/api/order/updateorderform`, JSON.stringify(data));
     }
 
     public getPlaceholder(seatId: number | string): Promise<ISiga> {
-        return this.commfetchGetFunc(`http://${this._domain}/api/order/placeholder?seatId=${seatId}`);
+        return this.commfetchGetFunc(`${this._domain}/api/order/placeholder?seatId=${seatId}`);
     }
 
     public getOrderForm(seatId: string): Promise<Array<IDish>> {
-        return this.commfetchGetFunc(`http://${this._domain}/api/order/orderForm?seatId=${seatId}`);
+        return this.commfetchGetFunc(`${this._domain}/api/order/orderForm?seatId=${seatId}`);
     }
 
     public getSeatClose(seatId: string): Promise<ISiga> {
-        return this.commfetchGetFunc(`http://${this._domain}/api/order/PlaceClose?seatId=${seatId}`);
+        return this.commfetchGetFunc(`${this._domain}/api/order/PlaceClose?seatId=${seatId}`);
     }
 
     public getRefund(seatId: string): Promise<ISiga> {
-        return this.commfetchGetFunc(`http://${this._domain}/api/order/Refund?seatId=${seatId}`);
+        return this.commfetchGetFunc(`${this._domain}/api/order/Refund?seatId=${seatId}`);
     }
 
     public getStatus(): Promise<IStatus> {
-        return this.commfetchGetFunc(`http://${this._domain}/api/admin/Statistics`);
+        return this.commfetchGetFunc(`${this._domain}/api/admin/Statistics`);
     }
     public static Instance(): IApi {
         if (!this._instance) {
