@@ -126,6 +126,7 @@ namespace Restaurant.Controllers
 
             var statistics = _dbContext.statistics.FirstOrDefault(t => t.Id == 1);
             statistics.refund++;
+            statistics.totalRevenue += item.total;
             _dbContext.statistics.Update(statistics);
 
             // 清空记录
